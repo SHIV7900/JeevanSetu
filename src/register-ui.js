@@ -1,0 +1,8 @@
+function addRegister(){
+  const card=document.querySelector('.login-card');if(!card||card.querySelector('[data-register]'))return;
+  const btn=document.createElement('button');btn.type='button';btn.dataset.register='true';btn.className='register-link';btn.textContent='New user? Create account';card.append(btn);
+  btn.onclick=()=>{card.innerHTML=`<div class="logo"><span>♥</span>Jeevan<span>Setu</span></div><h2>Create account</h2><p class="register-note">New accounts are created as Citizen accounts.</p><form id="register-form"><label>Full name<input required name="name" placeholder="Your full name"></label><label>Email<input required type="email" name="email" placeholder="you@example.com"></label><label>Password<input required type="password" minlength="6" name="password" placeholder="Minimum 6 characters"></label><p class="form-error" hidden></p><button class="btn" type="submit">Create account</button></form><button type="button" class="register-link" id="back-login">Back to login</button>`;
+    card.querySelector('#back-login').onclick=()=>location.reload();card.querySelector('#register-form').onsubmit=async e=>{e.preventDefault();let f=new FormData(e.target),error=card.querySelector('.form-error');try{let r=await fetch('http://localhost:4000/api/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(f))}),d=await r.json();if(!r.ok)throw Error(d.error);localStorage.setItem('js_token',d.token);localStorage.setItem('js_user',JSON.stringify(d.user));location.reload()}catch(x){error.hidden=false;error.textContent=x.message}};
+  };
+}
+new MutationObserver(addRegister).observe(document.documentElement,{childList:true,subtree:true});addRegister();

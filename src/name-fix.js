@@ -1,0 +1,1 @@
+const saved=localStorage.getItem('js_user');if(saved){try{const user=JSON.parse(saved);if(user.name==='Arjun Kumar'){user.name='Shivam Verma';localStorage.setItem('js_user',JSON.stringify(user));location.reload()}}catch{}}
