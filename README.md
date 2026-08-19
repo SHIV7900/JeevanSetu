@@ -17,6 +17,15 @@ npm run dev
 Frontend: `http://localhost:5173`  
 API: `http://localhost:4000/api/health`
 
+## Deploy
+
+Set these environment variables in your hosting dashboard:
+
+- `VITE_API_URL`: the public API URL ending in `/api`, for example `https://api.example.com/api`.
+- `CORS_ORIGIN`: the exact public frontend URL, for example `https://jeevansetu.example.com`.
+
+The backend uses the platform-provided `PORT` automatically. For local development, these variables are optional: the frontend uses `http://localhost:4000/api` and CORS permits local requests. Do not commit a real `.env` file or `server/data.json`.
+
 ## API included
 
 - User registration/login and signed local tokens
